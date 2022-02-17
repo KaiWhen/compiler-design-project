@@ -41,21 +41,4 @@ lrule
 
 %%
 
-class Token {
-    TokenType type;
-    String text;
-    
-    Token(String t, TokenType type) {
-        this.text = t;
-        this.type = type;
-    }
-    
-    public String toString() {
-        return String.format("%s %s", type, text);
-    }
-}
 
-enum TokenType {
-    Type_String;
-    Type_Integer;
-}
