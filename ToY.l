@@ -95,7 +95,7 @@ Comment = \^\/\/.*|##.*
 }
 
 . {
-throw new Error("Illegal character <"+Lexer()+">");
+throw new Error("Illegal character <"+yytext()+">");
 }
 
 
