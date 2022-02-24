@@ -21,9 +21,9 @@ class Token {
 
 class Main {
     public static void main(String argv[]) throws IOException {
-        Yylex yy = new Yylex(System.in);
+        Lexer yy = new Lexer(System.in); /* input stream, expects a reader */
         Yytoken t;
-        while ((t = yy.yylex()) != null)
+        while ((t = yy.Lexer()) != null)
             System.out.println(t);
     }
 }
@@ -95,7 +95,7 @@ Comment = \^\/\/.*|##.*
 }
 
 . {
-throw new Error("Illegal character <"+yytext()+">");
+throw new Error("Illegal character <"+Lexer()+">");
 }
 
 
