@@ -1,11 +1,10 @@
 default:
 	clear
 	jflex ToY.l
-	bison ToY.y -L java
 	javac *.java
 
 test:
-	java -cp ToY
+	java ToY.java test.txt
 
 clean:
-	rm ToY.java *.class Yylex.java Yylex.java\~
+	rm *.java *.class *java\~

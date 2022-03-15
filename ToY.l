@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 class Token {
     TokenType type;
@@ -13,89 +14,102 @@ class Token {
         return String.format("%s %s", type, text);
     }
     
-    enum TokenType {
-        Type_String,
-        Type_Integer
+    public static void main(String args[]) throws IOException {
+
+    try {
+         Reader input =
+            args.length > 0 ?
+               new FileReader(args[0]) :
+               new InputStreamReader(System.in);
+         ToY scanner = new ToY(input);
+         Token token;
+         do {
+            token = scanner.yylex();
+            System.out.println(token);
+         }
+         while (token != null);
+      } catch (IOException e) {
+         System.err.println(e);
+      }
     }
 }
 
-class Main {
-    public static void main(String argv[]) throws IOException {
-        Yylex yy = new Yylex(System.in);
-        Yytoken t;
-        while ((t = yy.yylex()) != null)
-            System.out.println(t);
-    }
+enum TokenType {
+    type_String,
+    type_Integer
 }
+
 
 %%
 
 Digit = [0 - 9]
 ID = [_a-zA-Z][_a-zA-Z0-9]
-String = \"([^\\\"]|\\.)*\"
-WhiteSp = [\040\ n]
+String = \"([^\"])*\"
+LineTerminator = \r|\n|\r\n
+WhiteSp = {LineTerminator} | [ \t\f]
 Comment = \^\/\/.*|##.*
 
 %type Token
 %unicode
-%class Lexer
+%class ToY
+%eofclose
 
 %%
-<YYINITIAL> {
     /* keywords */
-    "if" { System.out.print("VALID"); }
-    "else" { System.out.print("VALID"); }
-    "then" { System.out.print("VALID"); }
-    "bool" { System.out.print("VALID"); }
-    "int" { System.out.print("VALID"); }
-    "true" { System.out.print("VALID"); }
-    "false" { System.out.print("VALID"); }
-    "void" { System.out.print("VALID"); }
-    "printf" { System.out.print("VALID"); }
-    "string" { System.out.print("VALID"); }
-    "struct" { System.out.print("VALID"); }
-    "for" { System.out.print("VALID"); }
-    "return" { System.out.print("VALID"); }
+    "if" { return new Token(yytext(), TokenType.type_String); }
+    "else" { return new Token(yytext(), TokenType.type_String); }
+    "then" { return new Token(yytext(), TokenType.type_String); }
+    "bool" { return new Token(yytext(), TokenType.type_String); }
+    "int" { return new Token(yytext(), TokenType.type_String); }
+    "true" { return new Token(yytext(), TokenType.type_String); }
+    "false" { return new Token(yytext(), TokenType.type_String); }
+    "void" { return new Token(yytext(), TokenType.type_String); }
+    "printf" { return new Token(yytext(), TokenType.type_String); }
+    "string" { return new Token(yytext(), TokenType.type_String); }
+    "struct" { return new Token(yytext(), TokenType.type_String); }
+    "for" { return new Token(yytext(), TokenType.type_String); }
+    "return" { return new Token(yytext(), TokenType.type_String); }
     
     /* operators */
-    "<" { System.out.print("VALID"); }
-    "<=" { System.out.print("VALID"); }
-    ">" { System.out.print("VALID"); }
-    ">=" { System.out.print("VALID"); }
-    "==" { System.out.print("VALID"); }
-    "!=" { System.out.print("VALID"); }
-    "{" { System.out.print("VALID"); }
-    "}" System.out.print("VALID"); }
-    ";" { System.out.print("VALID"); }
-    "!" { System.out.print("VALID"); }
-    "(" { System.out.print("VALID"); }
-    ")" { System.out.print("VALID"); }
-    "+" { System.out.print("VALID"); }
-    "-" { System.out.print("VALID"); }
-    "." { System.out.print("VALID"); }
-    "=" { System.out.print("VALID"); }
-    "mod" { System.out.print("VALID"); }
-    "and" { System.out.print("VALID"); }
-    "or" { System.out.print("VALID"); }
-    "not" { System.out.print("VALID"); }
+    "<" { return new Token(yytext(), TokenType.type_String); }
+    "<=" { return new Token(yytext(), TokenType.type_String); }
+    ">" { return new Token(yytext(), TokenType.type_String); }
+    ">=" { return new Token(yytext(), TokenType.type_String); }
+    "==" { return new Token(yytext(), TokenType.type_String); }
+    "!=" { return new Token(yytext(), TokenType.type_String); }
+    "{" { return new Token(yytext(), TokenType.type_String); }
+    "}" { return new Token(yytext(), TokenType.type_String); }
+    ";" { return new Token(yytext(), TokenType.type_String); }
+    "!" { return new Token(yytext(), TokenType.type_String); }
+    "(" { return new Token(yytext(), TokenType.type_String); }
+    ")" { return new Token(yytext(), TokenType.type_String); }
+    "+" { return new Token(yytext(), TokenType.type_String); }
+    "-" { return new Token(yytext(), TokenType.type_String); }
+    "." { return new Token(yytext(), TokenType.type_String); }
+    "=" { return new Token(yytext(), TokenType.type_String); }
+    "mod" { return new Token(yytext(), TokenType.type_String); }
+    "and" { return new Token(yytext(), TokenType.type_String); }
+    "or" { return new Token(yytext(), TokenType.type_String); }
+    "not" { return new Token(yytext(), TokenType.type_String); }
 
     /* identifiers */
-    {ID}+ { System.out.print("VALID"); }
+    {ID}+ { return new Token(yytext(), TokenType.type_String); }
     
     /* literals*/
-    {Digit}+ { System.out.print("VALID"); }
-    {String} { System.out.print("VALID"); }
+    {Digit}+ { return new Token(yytext(), TokenType.type_Integer); }
+    {String} { return new Token(yytext(), TokenType.type_String); }
 
     /* Whitespace */
     {WhiteSp} { /* Ignore */ }
 
     /* Comments */
-    {Comment} { System.out.print("VALID"); }
+    {Comment} { return new Token(yytext(), TokenType.type_String); }
 
-}
+    <<EOF>> { return null; }
 
-. {
-throw new Error("Illegal character <"+yytext()+">");
+
+
+    [^] { throw new Error("Illegal character <"+yytext()+">");
 }
 
 
