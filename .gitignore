@@ -1,3 +1,7 @@
 *.java
 *.class
 *.java~
+
+ToY
+*.c
+*.h
