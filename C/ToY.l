@@ -14,47 +14,47 @@ WhiteSp         {LineTerminator} | [ \t\f]
 
 %%
 
-"if" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"else" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"then" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"bool" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"int" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"true" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"false" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"void" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"printf" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"string" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"struct" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"for" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
-"return" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (KEYWORD); }
+"if" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (IF); }
+"else" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ELSE); }
+"then" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (THEN); }
+"bool" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (BOOL); }
+"int" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (INT); }
+"true" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (TRUE); }
+"false" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (FALSE); }
+"void" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (VOID); }
+"printf" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (PRINTF); }
+"string" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STR); }
+"struct" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRUCT); }
+"for" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (FOR); }
+"return" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RETURN); }
 
-"<" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"<=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-">" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-">=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"=="		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"!=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"{" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"}" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-";" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"!" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"(" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-")" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"+" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"-" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"." 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"mod" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"and" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"or" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
-"not" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OP); }
+"<" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LT); }
+"<=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LTE); }
+">" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (GT); }
+">=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (GTE); }
+"=="		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (EQ); }
+"!=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NE); }
+"{" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LCB); }
+"}" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RCB); }
+";" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (SC); }
+"!" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NEG); }
+"(" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LB); }
+")" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RB); }
+"+" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (PLUS); }
+"-" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MINUS); }
+"." 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (DOT); }
+"=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ASGN); }
+"mod" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MOD); }
+"and" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (AND); }
+"or" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OR); }
+"not" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NOT); }
 
 
 {ID}+ 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ID); }
 
 
-{Digit}+ 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (INT); }
-{String} 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRING); }
+{Digit}+ 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NUM); }
+{String} 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRLIT); }
 
 
 {WhiteSp} 	{  }
