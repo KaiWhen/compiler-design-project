@@ -22,6 +22,7 @@ type: INT
   ;
 
 string: STRLIT
+  ;
 
 returntype: type
   | VOID
@@ -54,6 +55,12 @@ statementseq:
 
 lexp: ID 
   | ID DOT lexp
+  ;
+
+expr: TRUE
+  ;
+
+%%
 
 int yyerror(const char *msg) {
 	fprintf(stderr, "%s\n", msg);
