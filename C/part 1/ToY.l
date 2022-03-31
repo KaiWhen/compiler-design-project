@@ -43,6 +43,8 @@ Comment2         \/\/[^\r\n]*
 ")" 		{ printf("VALID\n"); }
 "+" 		{ printf("VALID\n"); }
 "-" 		{ printf("VALID\n"); }
+"*"         { printf("VALID\n"); }
+"/"         { printf("VALID\n"); }
 "." 		{ printf("VALID\n"); }
 "=" 		{ printf("VALID\n"); }
 "mod" 		{ printf("VALID\n"); }

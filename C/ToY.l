@@ -42,6 +42,8 @@ WhiteSp         {LineTerminator} | [ \t\f]
 ")" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RB); }
 "+" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (PLUS); }
 "-" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MINUS); }
+"*" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MUL); }
+"/" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (DIV); }
 "." 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (DOT); }
 "=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ASGN); }
 "mod" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MOD); }
@@ -63,7 +65,7 @@ WhiteSp         {LineTerminator} | [ \t\f]
 
 <<EOF>>     { yyterminate(); }
 
-.       	{return *yytext; yyterminate(); }
+.       	{ printf("ERROR"); return *yytext; yyterminate(); }
 
 %%
 
