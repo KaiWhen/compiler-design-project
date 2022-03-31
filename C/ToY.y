@@ -9,7 +9,7 @@ int yyerror(const char *msg);
 %}
 
 %token IF THEN ELSE BOOL INT TRUE FALSE VOID PRINTF STR STRUCT FOR RETURN
-%token LT LTE GT GTE EQ NE LCB RCB SC NEG LB RB PLUS MINUS DOT ASGN MOD AND OR NOT
+%token LT LTE GT GTE EQ NE LCB RCB SC NEG LB RB PLUS MINUS MUL DIV DOT ASGN MOD AND OR NOT
 %token ID NUM STRLIT
 %token EOL
 
@@ -59,6 +59,45 @@ lexp: ID
 
 expr: TRUE
   ;
+
+pgm: proc pgmp
+  | STRUCT pgm
+  ;
+
+pgmp: 
+  | proc pgmp
+  | STRUCT pgmp
+  ;
+
+// EXPRESSIONS
+exp: intliteral
+  | stringLiteral
+  | TRUE
+  | FALSE
+  | exp op exp
+  | MINUS exp
+  | NOT exp
+  | lexp
+  | exp
+  ;
+
+op: ASGN
+  | MINUS
+  | AND
+  | MUL
+  | DIV
+  | MOD
+  | AND
+  | OR
+  | EQ
+  | GT
+  | LT
+  | GTE
+  | LTE 
+  | NE
+  ;
+
+
 
 %%
 
