@@ -3,14 +3,14 @@
 %{
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 #include "ToY.tab.h"
 %}
 
-Digit           [0 - 9]
-ID              [_a-zA-Z][_a-zA-Z0-9]
+Digit           -?[0-9]+
+ID              [^0-9][_a-zA-Z][_a-zA-Z0-9]*
 String          \"([^\\\"]|\\\.)*\"
-LineTerminator  \r|\n|\r\n
-WhiteSp         {LineTerminator} | [ \t\f]
+WhiteSp         [ \n\t\r]+
 
 %%
 
@@ -28,6 +28,7 @@ WhiteSp         {LineTerminator} | [ \t\f]
 "for" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (FOR); }
 "return" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RETURN); }
 
+","         { printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (COMMA); }
 "<" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LT); }
 "<=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LTE); }
 ">" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (GT); }
@@ -52,10 +53,10 @@ WhiteSp         {LineTerminator} | [ \t\f]
 "not" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NOT); }
 
 
-{ID}+ 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ID); }
+{ID}		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ID); }
 
 
-{Digit}+ 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NUM); }
+{Digit} 	{ if((int)*yytext < INT_MIN || (int)*yytext > INT_MAX) { printf("ERROR\n"); return *yytext; yyterminate(); } else printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NUM); }
 {String} 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRLIT); }
 
 
@@ -65,18 +66,18 @@ WhiteSp         {LineTerminator} | [ \t\f]
 
 <<EOF>>     { yyterminate(); }
 
-.       	{ printf("ERROR"); return *yytext; yyterminate(); }
+.       	{ printf("ERROR\n"); return *yytext; yyterminate(); }
 
 %%
 
-// int main( int argc, char **argv )
-// {
-//     ++argv, --argc;
-//     if ( argc > 0 )
-//         yyin = fopen( argv[0], "r" );
-//     else
-//         yyin = stdin;
-//         yylex();
-// }
+ /* int main( int argc, char **argv )
+ {
+     ++argv, --argc;
+     if ( argc > 0 )
+         yyin = fopen( argv[0], "r" );
+     else
+         yyin = stdin;
+         yylex();
+ } */
 
 

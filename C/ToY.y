@@ -2,22 +2,40 @@
 
 %{
 #include <stdio.h>
+#include <stdlib.h>
+#include "sym.h"
+#define YYDEBUG 1
 
 int yylex();
 int yyerror(const char *msg);
+
+install (char *sym_name) { 
+  symrec *s;
+  s = getsym (sym_name);
+  if (s == 0)
+    s = putsym (sym_name);
+  else { 
+    printf( "%s is already defined\n", sym_name );
+  }
+}
+context_check(char *sym_name) {
+  if(getsym(sym_name) == 0)
+    printf("%s is an undeclared identifier\n", sym_name);
+}
 
 %}
 
 %token IF BOOL INT TRUE FALSE VOID PRINTF STR STRUCT FOR RETURN
 %token LCB RCB SC LB RB DOT
 %token NUM STRLIT
+%token COMMA
 %token EOL
 
 %nonassoc THEN
 %nonassoc ELSE
 %left ID
 %left OR
-%left AND 
+%left AND
 %right ASGN
 %left EQ NE LT LTE GT GTE
 %left PLUS MINUS 
@@ -44,13 +62,16 @@ struct: STRUCT ID LCB declarationlist RCB
   ;
 
 declarationlist: declaration
-  | declaration ',' declarationlist
+  | declaration COMMA declarationlist
   ;
 
 declaration: type ID
   ;
 
-proc: returntype ID LB declarationlist RB LCB stmt RCB
+proc: returntype ID LB RB LCB RCB
+  | returntype ID LB declarationlist RB LCB stmt RCB
+  | returntype ID LB declarationlist RB LCB RCB
+  | returntype ID LB RB LCB stmt RCB
   ;
 
 stmt: FOR LB ID ASGN expr SC expr SC stmt RB stmt
@@ -108,7 +129,7 @@ expr: NUM
   ;
 
 exprlist: expr
-  | expr ',' exprlist
+  | expr COMMA exprlist
   ;
 
 
@@ -118,7 +139,7 @@ exprlist: expr
 
 int yyerror(const char *msg) {
 	fprintf(stderr, "%s\n", msg);
-  printf("ERROR");
+  printf("ERROR\n");
   return 0;
 }
 
