@@ -3,7 +3,6 @@
 #include <math.h>
 #include <string.h>
 #include "astheader.h"
-#include "func.h"
 
 struct object_list *var_list = NULL;
 
