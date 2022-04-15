@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#include "astheader.h"
+#include "AST.h"
 
 struct object_list *var_list = NULL;
 
