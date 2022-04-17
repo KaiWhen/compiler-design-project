@@ -3,6 +3,6 @@
 *.java~
 
 ToY
-*.c
-*.h
+ToY.tab.c
+ToY.tab.h
 *.zip

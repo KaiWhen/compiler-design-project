@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "sym.h"
 #define YYDEBUG 1
+extern FILE *yyin;
+extern FILE *yyout;
 
 int yylex();
 int yyerror(const char *msg);
@@ -33,7 +35,7 @@ context_check(char *sym_name) {
 
 %nonassoc THEN
 %nonassoc ELSE
-%left ID
+%nonassoc ID
 %left OR
 %left AND
 %right ASGN
@@ -68,10 +70,8 @@ declarationlist: declaration
 declaration: type ID
   ;
 
-proc: returntype ID LB RB LCB RCB
-  | returntype ID LB declarationlist RB LCB stmt RCB
-  | returntype ID LB declarationlist RB LCB RCB
-  | returntype ID LB RB LCB stmt RCB
+proc: returntype ID LB declarationlist RB LCB statementseq RCB
+  | returntype ID LB RB LCB statementseq RCB
   ;
 
 stmt: FOR LB ID ASGN expr SC expr SC stmt RB stmt
@@ -79,18 +79,17 @@ stmt: FOR LB ID ASGN expr SC expr SC stmt RB stmt
   | IF LB expr RB THEN stmt ELSE stmt
   | PRINTF LB STR RB SC
   | RETURN expr SC
-  | LCB statementseq RCB
   | type ID SC
   | lexp ASGN expr SC
-  | ID LB expr RB SC
-  | ID ASGN ID LB exprlist RB SC
+  | lexp LB exprlist RB SC
+  | lexp ASGN lexp LB exprlist RB SC
   ;
 
-statementseq:
+statementseq: stmt
   | stmt statementseq
   ;
 
-lexp: ID 
+lexp: ID
   | ID DOT lexp
   ;
   
@@ -143,9 +142,17 @@ int yyerror(const char *msg) {
   return 0;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+    if(argc > 1) {
+      yyin = fopen(argv[1], "r");
+    }
+    else {
+      yyin = stdin;
+    }
     int parse = yyparse();
+    fclose(yyin);
+    
     if(parse == 0) printf("VALID\n");
     return 0;
 }
