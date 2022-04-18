@@ -1,3 +1,5 @@
+//source: https://github.com/drifter1/compiler
+
 /* token types */
 #define UNDEF 0
 #define INT_TYPE 1

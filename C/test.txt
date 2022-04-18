@@ -1,12 +1,3 @@
-## Group 28
-
-## - JISS JOSEPH
-## - KEVIN WANG
-
-## Valid: Yes
-
-## Description: function with return type int (checking comment, expr in parenthases, for loop, return type)
-
 int func()
 {
 	int x;

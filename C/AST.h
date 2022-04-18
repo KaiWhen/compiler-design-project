@@ -1,3 +1,5 @@
+//source: https://github.com/drifter1/compiler
+
 typedef enum Node_Type {
 	BASIC_NODE,   // no special usage (for roots only)
 	// declarations

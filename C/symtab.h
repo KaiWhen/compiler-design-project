@@ -1,3 +1,5 @@
+//source: https://github.com/drifter1/compiler
+
 /* maximum size of hash table */
 #define SIZE 211
 
