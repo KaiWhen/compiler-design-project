@@ -9,7 +9,7 @@
 
 void main()
 {
-	System.out.println("Printing 1 to 5 \n");
+	printf("Printing 1 to 5 \n");
 	int i;
   
 	## For Loop - Missing closing parenthasis
