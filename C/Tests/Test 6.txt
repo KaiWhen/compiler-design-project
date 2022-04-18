@@ -7,7 +7,7 @@
 
 ## Description: Check OR Operation
 
-bool main()
+bool checkOr()
 {
 	int x = 6; 
 	int y = 8;
@@ -17,5 +17,7 @@ bool main()
 		return true;
 		
 	}
+	
+	return false;
 	
 }
