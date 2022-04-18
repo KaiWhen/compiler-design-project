@@ -1,0 +1,17 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Check undeclared variable - case sensitive
+
+void main()
+{
+	int x = 20, y = 40;
+
+	int Sum = a + b;
+
+	printf( "Sum of variables is %d" + sum);
+}

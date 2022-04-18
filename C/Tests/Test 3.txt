@@ -1,0 +1,21 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Incorrect For Loop Decalaration
+
+void main()
+{
+	int x = 4;
+	int answer;
+	int y;
+
+	for (y = 1, y <= 10; y++) {
+		answer = x * i;
+		printf(answer);
+	}
+	
+}
