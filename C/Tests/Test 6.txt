@@ -9,8 +9,10 @@
 
 bool checkOr()
 {
-	int x = 6; 
-	int y = 8;
+	int x;
+	int y;
+    	x = 6;
+    	y = 6;
 	
 	if(x<y or y<6) then {
 	
