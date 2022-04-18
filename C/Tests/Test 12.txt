@@ -1,0 +1,17 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: Yes
+
+## Description: check struct with single and multiple declarations
+
+struct person {
+    int age,
+    string person
+}
+
+struct animal {
+    int weight
+}

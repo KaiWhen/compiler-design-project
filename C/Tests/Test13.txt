@@ -1,0 +1,16 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: Yes
+
+## Description: check negative number (unary operator)
+
+void func()
+{
+	int x;
+	int y;
+    x = -6;
+    y = -10;
+}
