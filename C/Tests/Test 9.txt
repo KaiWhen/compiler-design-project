@@ -9,8 +9,10 @@
 
 void main()
 {
-	float a = 10;
-    float b = 5;
+	float a;
+	a = 10;
+    float b;
+    b = 5;
     
     if (b == 0) {
         printf("Incorrect comparison");
