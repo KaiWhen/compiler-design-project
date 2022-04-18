@@ -12,7 +12,7 @@ void main()
 	float a = 10;
     float b = 5;
     
-    if (b = 0) {
+    if (b == 0) {
         printf("Incorrect comparison");
     } else {
         printf("Wrong");
