@@ -9,9 +9,13 @@
 
 void main()
 {
-	int x = 20, y = 40;
+	int x;
+	int y;
+	x = 20;
+	y = 40;
 
-	int Sum = a + b;
+	int Sum;
+	Sum = a + b;
 
 	printf(sum);
 }
