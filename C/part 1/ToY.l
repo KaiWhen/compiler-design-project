@@ -15,49 +15,49 @@ UCN	            (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 
 %%
 
-"if" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (IF); }
-"else" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ELSE); }
-"then" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (THEN); }
-"bool" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (BOOL); }
-"int" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (INT); }
-"true" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (TRUE); }
-"false" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (FALSE); }
-"void" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (VOID); }
-"printf" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (PRINTF); }
-"string" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STR); }
-"struct" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRUCT); }
-"for" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (FOR); }
-"return" 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RETURN); }
+"if" 		{  return (IF); }
+"else" 		{  return (ELSE); }
+"then" 		{  return (THEN); }
+"bool" 		{  return (BOOL); }
+"int" 		{  return (INT); }
+"true" 		{  return (TRUE); }
+"false" 	{  return (FALSE); }
+"void" 		{  return (VOID); }
+"printf" 	{  return (PRINTF); }
+"string" 	{  return (STR); }
+"struct" 	{  return (STRUCT); }
+"for" 		{  return (FOR); }
+"return" 	{  return (RETURN); }
 
-"<" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LT); }
-"<=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LTE); }
-">" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (GT); }
-">=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (GTE); }
-"=="		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (EQ); }
-"!=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NE); }
-"{" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LCB); }
-"}" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RCB); }
-";" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (SC); }
-"!" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NEG); }
-"(" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (LB); }
-")" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (RB); }
-"+" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (PLUS); }
-"-" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MINUS); }
-"*" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MUL); }
-"/" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (DIV); }
-"." 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (DOT); }
-"=" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ASGN); }
-"mod" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (MOD); }
-"and" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (AND); }
-"or" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (OR); }
-"not" 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NOT); }
-
-
-([_a-zA-Z]|{UCN})([_a-zA-Z0-9]|{UCN})* 		{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (ID); }
+"<" 		{  return (LT); }
+"<=" 		{  return (LTE); }
+">" 		{  return (GT); }
+">=" 		{  return (GTE); }
+"=="		{  return (EQ); }
+"!=" 		{  return (NE); }
+"{" 		{  return (LCB); }
+"}" 		{  return (RCB); }
+";" 		{  return (SC); }
+"!" 		{  return (NEG); }
+"(" 		{  return (LB); }
+")" 		{  return (RB); }
+"+" 		{  return (PLUS); }
+"-" 		{  return (MINUS); }
+"*" 		{  return (MUL); }
+"/" 		{  return (DIV); }
+"." 		{  return (DOT); }
+"=" 		{  return (ASGN); }
+"mod" 		{  return (MOD); }
+"and" 		{  return (AND); }
+"or" 		{  return (OR); }
+"not" 		{  return (NOT); }
 
 
-{Digit}+ 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (NUM); }
-{String} 	{ printf("[token at line %d: \"%s\"]\n", yylineno, yytext); return (STRLIT); }
+([_a-zA-Z]|{UCN})([_a-zA-Z0-9]|{UCN})* 		{  return (ID); }
+
+
+{Digit}+ 	{  return (NUM); }
+{String} 	{  return (STRLIT); }
 
 
 {WhiteSp} 	{  }

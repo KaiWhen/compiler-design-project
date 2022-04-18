@@ -1,37 +1,31 @@
-%define parse.error verbose
-
 %{
-#include <stdio.h>
-#include <stdlib.h>
-#include "sym.h"
-#define YYDEBUG 1
-extern FILE *yyin;
-extern FILE *yyout;
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <string.h>
+  #include "symtab.c"
+  #include "semantics.c"
+  extern FILE *yyin;
+  extern FILE *yyout;
 
-int yylex();
-int yyerror(const char *msg);
-
-install (char *sym_name) { 
-  symrec *s;
-  s = getsym (sym_name);
-  if (s == 0)
-    s = putsym (sym_name);
-  else { 
-    printf( "%s is already defined\n", sym_name );
-  }
-}
-context_check(char *sym_name) {
-  if(getsym(sym_name) == 0)
-    printf("%s is an undeclared identifier\n", sym_name);
-}
+  int yylex();
+  int yyerror(const char *msg);
 
 %}
 
-%token IF BOOL INT TRUE FALSE VOID PRINTF STR STRUCT FOR RETURN
-%token LCB RCB SC LB RB DOT
-%token NUM STRLIT
-%token COMMA
+%union {
+  int data_type;
+	struct list_t* symtab_item;
+}
+
+
+%token IF BOOL INT VOID PRINTF STR STRUCT FOR RETURN THEN ELSE
+%token TRUE FALSE
+%token EQ NE LT LTE GT GTE OR AND
+%token LCB RCB SC LB RB DOT ASGN COMMA
+%token NUM 
+%token STRLIT
 %token EOL
+%token <symtab_item> ID
 
 %nonassoc THEN
 %nonassoc ELSE
@@ -44,15 +38,17 @@ context_check(char *sym_name) {
 %left MUL DIV MOD NEG NOT
 %nonassoc prec_unary
 
+%type <data_type> type
+
 %start pgm
 
 
 %%
 
-type: INT
-  | BOOL
-  | STR
-  | ID
+type: INT { $$ = INT_TYPE; }
+  | BOOL { $$ = BOOL_TYPE; }
+  | STR { $$ = STR_TYPE; }
+  | ID { $$ = ID_TYPE; }
   ;
 
 
@@ -63,20 +59,25 @@ returntype: type
 struct: STRUCT ID LCB declarationlist RCB
   ;
 
-declarationlist: declaration
+declarationlist:
+  | declaration
   | declaration COMMA declarationlist
   ;
 
-declaration: type ID
+declaration: { declare = 1; } type ID { declare = 0; }
   ;
 
-proc: returntype ID LB declarationlist RB LCB statementseq RCB
-  | returntype ID LB RB LCB statementseq RCB
+proc: { incr_scope(); } returntype ID LB declarationlist RB LCB statementseq RCB { hide_scope(); }
   ;
 
-stmt: FOR LB ID ASGN expr SC expr SC stmt RB stmt
-  | IF LB expr RB THEN stmt
-  | IF LB expr RB THEN stmt ELSE stmt
+stmt: FOR LB ID ASGN expr SC boolexpr SC fortail RB LCB statementseq RCB
+  | FOR LB ID ASGN expr SC boolexpr SC fortail RB stmt
+  | IF LB boolexpr RB THEN LCB statementseq RCB
+  | IF LB boolexpr RB THEN stmt
+  | IF LB boolexpr RB THEN LCB statementseq RCB ELSE LCB statementseq RCB
+  | IF LB boolexpr RB THEN LCB statementseq RCB ELSE stmt
+  | IF LB boolexpr RB THEN stmt ELSE stmt
+  | IF LB boolexpr RB THEN stmt ELSE LCB statementseq RCB
   | PRINTF LB STR RB SC
   | RETURN expr SC
   | type ID SC
@@ -85,9 +86,11 @@ stmt: FOR LB ID ASGN expr SC expr SC stmt RB stmt
   | lexp ASGN lexp LB exprlist RB SC
   ;
 
-statementseq: stmt
+statementseq:
   | stmt statementseq
   ;
+
+fortail: lexp ASGN expr SC ;
 
 lexp: ID
   | ID DOT lexp
@@ -104,30 +107,34 @@ pgmp:
 
 // EXPRESSIONS
 expr: NUM
-  | TRUE
-  | FALSE
   | expr PLUS expr
   | expr MINUS expr
   | expr AND expr
   | expr MUL expr
   | expr DIV expr
   | expr MOD expr
-  | expr OR expr
+  | MINUS expr
+  %prec prec_unary
+  | lexp
+  | LB expr RB
+  | STRLIT
+  | boolexpr
+  ;
+
+boolexpr: expr OR expr
   | expr EQ expr
   | expr GT expr
   | expr LT expr
   | expr GTE expr
   | expr LTE expr
   | expr NE expr
-  | MINUS expr
-  %prec prec_unary
   | NEG expr
-  | lexp
-  | LB expr RB
-  | STRLIT
+  | TRUE
+  | FALSE
   ;
 
-exprlist: expr
+exprlist: 
+  | expr
   | expr COMMA exprlist
   ;
 
@@ -144,6 +151,10 @@ int yyerror(const char *msg) {
 
 int main(int argc, char *argv[])
 {
+    init_hash_table();
+
+    queue = NULL;
+
     if(argc > 1) {
       yyin = fopen(argv[1], "r");
     }
@@ -153,6 +164,6 @@ int main(int argc, char *argv[])
     int parse = yyparse();
     fclose(yyin);
     
-    if(parse == 0) printf("VALID\n");
+    if(parse == 0) printf("\nVALID\n");
     return 0;
 }

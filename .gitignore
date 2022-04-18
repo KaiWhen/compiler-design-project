@@ -4,5 +4,6 @@
 
 ToY
 ToY.tab.c
+lex.yy.c
 ToY.tab.h
 *.zip

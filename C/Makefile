@@ -1,8 +1,8 @@
 default:
 	clear
-	flex -l ToY.l
 	bison -d ToY.y 
-	gcc -o ToY ToY.tab.c lex.yy.c -lm
+	flex -l ToY.l
+	gcc -o ToY ToY.tab.c lex.yy.c
 
 clean:
 	rm ToY ToY.tab.* lex.yy.c
