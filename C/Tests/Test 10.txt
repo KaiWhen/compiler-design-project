@@ -9,8 +9,10 @@
 
 int testType()
 {
-	int a = 10;
-    int b = 1atqw;
+	int a;
+	a = 10;
+    int b;
+    b = 1atqw;
     
     return b;
 }
