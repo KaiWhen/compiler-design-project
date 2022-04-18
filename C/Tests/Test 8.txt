@@ -1,0 +1,15 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Undeclared variable type
+
+void main()
+{
+	var = 5;
+     
+    printf(var);
+}

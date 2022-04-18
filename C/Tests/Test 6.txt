@@ -1,0 +1,25 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: Yes
+
+## Description: Check OR Operation
+
+bool checkOr()
+{
+	int x;
+	int y;
+    	x = 6;
+    	y = 6;
+	
+	if(x<y or y<6) then {
+	
+		return true;
+		
+	}
+	
+	return false;
+	
+}

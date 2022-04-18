@@ -1,0 +1,21 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Division by non-integer
+
+void main()
+{
+	int x;
+	x = 10; 
+	int y;
+	y = 0;
+	int z;
+	z = x/"5";
+
+	printf(z);
+	
+}

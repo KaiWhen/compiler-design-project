@@ -1,0 +1,18 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Invalid Variable value
+
+int testType()
+{
+	int a;
+	a = 10;
+    int b;
+    b = 1atqw;
+    
+    return b;
+}

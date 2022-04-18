@@ -1,0 +1,22 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: No
+
+## Description: Undeclared variable type
+
+void main()
+{
+	float a;
+	a = 10;
+    float b;
+    b = 5;
+    
+    if (b == 0) {
+        printf("Incorrect comparison");
+    } else {
+        printf("Wrong");
+    }
+}

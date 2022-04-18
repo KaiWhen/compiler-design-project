@@ -1,0 +1,24 @@
+## Group 28
+
+## - JISS JOSEPH
+## - KEVIN WANG
+
+## Valid: Yes
+
+## Description: Check for boolean statements
+
+bool lessThan()
+{
+	int x;
+	x = 10; 
+	int y;
+	y = 12;
+	
+	if(x<y) then {
+	
+		return true;
+		
+	}
+	
+	return false;
+}
