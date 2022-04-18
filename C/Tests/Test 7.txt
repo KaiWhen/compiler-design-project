@@ -3,9 +3,9 @@
 ## - JISS JOSEPH
 ## - KEVIN WANG
 
-## Valid: Yes
+## Valid: No
 
-## Description: Semantic Error
+## Description: lexp not an ID
 
 void main()
 {
