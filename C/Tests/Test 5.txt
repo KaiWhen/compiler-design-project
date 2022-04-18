@@ -9,8 +9,10 @@
 
 bool lessThan()
 {
-	int x = 10; 
-	int y = 12;
+	int x;
+	x = 10; 
+	int y;
+	y = 12;
 	
 	if(x<y) then {
 	
