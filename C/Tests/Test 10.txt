@@ -5,12 +5,12 @@
 
 ## Valid: No
 
-## Description: Invalid Varible type(Integer) - return type int
+## Description: Invalid Variable value
 
 int testType()
 {
 	int a = 10;
     int b = 1atqw;
     
-    return b
+    return b;
 }
